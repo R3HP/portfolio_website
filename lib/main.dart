@@ -25,8 +25,14 @@ class MyApp extends StatelessWidget {
                   bodyText1: const TextStyle(color: bodyTextColor),
                   bodyText2: const TextStyle(color: bodyTextColor))),
       home: const HomeScreen(),
-      routes: {
-        ProjectDetailsScreen.routeName :(context) => const ProjectDetailsScreen()
+      // routes: {
+      //   ProjectDetailsScreen.routeName :(context) => const ProjectDetailsScreen()
+      // },
+      onGenerateRoute: (setting){
+        if(setting.name!.contains('/details')){
+          final arguments =setting.name!.split('?id=');
+          return MaterialPageRoute(builder: ((context) => ProjectDetailsScreen(projectId: arguments[1],)),);
+        }
       },
     );
   }

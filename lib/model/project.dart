@@ -3,14 +3,16 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 class Project {
+  final String id;
   final String name;
   final String desc;
   final List<String> keyPoints;
   final String gitHubUrl;
   final String imageUrl;
   final String platform;
-  
+
   Project({
+    required this.id,
     required this.name,
     required this.desc,
     required this.keyPoints,
@@ -20,6 +22,7 @@ class Project {
   });
 
   Project copyWith({
+    String? id,
     String? name,
     String? desc,
     List<String>? keyPoints,
@@ -28,6 +31,7 @@ class Project {
     String? platform,
   }) {
     return Project(
+      id: id ?? this.id,
       name: name ?? this.name,
       desc: desc ?? this.desc,
       keyPoints: keyPoints ?? this.keyPoints,
@@ -39,6 +43,7 @@ class Project {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'name': name,
       'desc': desc,
       'keyPoints': keyPoints,
@@ -50,6 +55,7 @@ class Project {
 
   factory Project.fromMap(Map<String, dynamic> map) {
     return Project(
+      id: map['id'] ?? '',
       name: map['name'] ?? '',
       desc: map['desc'] ?? '',
       keyPoints: List<String>.from(map['keyPoints']),
@@ -61,33 +67,73 @@ class Project {
 
   String toJson() => json.encode(toMap());
 
-  factory Project.fromJson(String source) => Project.fromMap(json.decode(source));
+  factory Project.fromJson(String source) =>
+      Project.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'Project(name: $name, desc: $desc, keyPoints: $keyPoints, gitHubUrl: $gitHubUrl, imageUrl: $imageUrl, platform: $platform)';
+    return 'Project(id: $id, name: $name, desc: $desc, keyPoints: $keyPoints, gitHubUrl: $gitHubUrl, imageUrl: $imageUrl, platform: $platform)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is Project &&
-      other.name == name &&
-      other.desc == desc &&
-      listEquals(other.keyPoints, keyPoints) &&
-      other.gitHubUrl == gitHubUrl &&
-      other.imageUrl == imageUrl &&
-      other.platform == platform;
+        other.id == id &&
+        other.name == name &&
+        other.desc == desc &&
+        listEquals(other.keyPoints, keyPoints) &&
+        other.gitHubUrl == gitHubUrl &&
+        other.imageUrl == imageUrl &&
+        other.platform == platform;
   }
 
   @override
   int get hashCode {
-    return name.hashCode ^
-      desc.hashCode ^
-      keyPoints.hashCode ^
-      gitHubUrl.hashCode ^
-      imageUrl.hashCode ^
-      platform.hashCode;
+    return id.hashCode ^
+        name.hashCode ^
+        desc.hashCode ^
+        keyPoints.hashCode ^
+        gitHubUrl.hashCode ^
+        imageUrl.hashCode ^
+        platform.hashCode;
   }
+
+  static final projects = [
+    Project(
+        id: '1',
+        name: 'Security Check In App',
+        desc:'an offline flutter security check in app I developed for a friend of mine who wanted to organize his drivers check in and out time and date plus the number of items they ship and shipment ids.this project uses Hive DB and Provider State Management package using MVVM Architecture with support to Managing drivers and making a data grid for data and exporting it in a pdf or excel file and storing it in external storage. this project also uses get_it package for dependency injection',
+        keyPoints: ['hive', 'dependency_injection' , 'provider', 'MVVM Architecture' , 'PDF Export' , 'Excell Export'],
+        gitHubUrl: 'https://github.com/R3HP/security_check_in_app',
+        imageUrl: 'https://digiato.com/wp-content/uploads/2021/07/instagram-security-checkup-9to5mac.jpg',
+        platform: 'Flutter'),
+    Project(
+        id: '2',
+        name: 'Chat App With Video Calling',
+        desc:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        keyPoints: [''],
+        gitHubUrl: '',
+        imageUrl: '',
+        platform: 'Flutter'),
+    Project(
+        id: '3',
+        name: 'Food Ordering App',
+        desc: 'Lorem ipsum dolor sit amet',
+        keyPoints: [''],
+        gitHubUrl: '',
+        imageUrl: '',
+        platform: 'Flutter'),
+    Project(
+        id: '4',
+        name: 'Shop Api',
+        desc:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        keyPoints: [''],
+        gitHubUrl: '',
+        imageUrl: '',
+        platform: 'NodeJs'),
+  ];
 }
