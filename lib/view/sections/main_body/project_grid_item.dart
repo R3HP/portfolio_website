@@ -36,24 +36,28 @@ class ProjectGridItem extends StatelessWidget {
                   child: Text(project.desc,
                       style: Theme.of(context).textTheme.subtitle2))),
           const Spacer(),
-          TextButton(
-              onPressed: () {},
-              child: const Text(
-                'Read More ...',
-                style: TextStyle(color: primaryColor),
-              ),
-          )
-          // Link(
+          // TextButton(
+          //     onPressed: () {
+          //       // final router = Router.of(context).routerDelegate as ProjectRouterDelegate;
+          //       final router = ProjectRouterDelegate.of(context);
+          //       router.push(ProjectRoutePath.details(project.id));
 
-          //   uri: Uri.parse(ProjectDetailsScreen.routeName+'/${project.id}'),
-          //   builder: (ctx, onTap) => TextButton(
-          //     onPressed: onTap,
+          //     },
           //     child: const Text(
           //       'Read More ...',
           //       style: TextStyle(color: primaryColor),
           //     ),
-          //   ),
           // )
+          Link(
+            uri: Uri.parse(ProjectDetailsScreen.routeName+'/${project.id}'),
+            builder: (ctx, onTap) => TextButton(
+              onPressed: onTap,
+              child: const Text(
+                'Read More ...',
+                style: TextStyle(color: primaryColor),
+              ),
+            ),
+          )
           
         ],
       ),

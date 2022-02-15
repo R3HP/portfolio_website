@@ -135,7 +135,7 @@ ChangeNotifier , PopNavigatorRouterDelegateMixin<ProjectRoutePath> {
         if(show404) 
            MaterialPage(key: const ValueKey('unknown'),child: UnknownScreen()),
         if(_selectedProject != null) 
-           MaterialPage(key: const ValueKey('details'), child: const ProjectDetailsScreen(),arguments: Project.projects.firstWhere((element) => element.id == _selectedProject!.id))
+           MaterialPage(key:  ValueKey('details/${_selectedProject!.id}'), child: const ProjectDetailsScreen(),arguments: Project.projects.firstWhere((element) => element.id == _selectedProject!.id))
       ],
     );
   }
