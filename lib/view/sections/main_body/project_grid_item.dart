@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio_app/constants.dart';
+import 'package:portfolio_app/main.dart';
 import 'package:portfolio_app/model/project.dart';
 import 'package:portfolio_app/view/sections/details_screen/details_screen.dart';
 import 'package:url_launcher/link.dart';
 
 class ProjectGridItem extends StatelessWidget {
   final Project project;
+  // final ValueChanged<Project> handler;
 
   const ProjectGridItem({
     Key? key,
@@ -34,17 +36,25 @@ class ProjectGridItem extends StatelessWidget {
                   child: Text(project.desc,
                       style: Theme.of(context).textTheme.subtitle2))),
           const Spacer(),
-          Link(
-
-            uri: Uri.parse(ProjectDetailsScreen.routeName),
-            builder: (ctx, onTap) => TextButton(
-              onPressed: onTap,
+          TextButton(
+              onPressed: () {},
               child: const Text(
                 'Read More ...',
                 style: TextStyle(color: primaryColor),
               ),
-            ),
           )
+          // Link(
+
+          //   uri: Uri.parse(ProjectDetailsScreen.routeName+'/${project.id}'),
+          //   builder: (ctx, onTap) => TextButton(
+          //     onPressed: onTap,
+          //     child: const Text(
+          //       'Read More ...',
+          //       style: TextStyle(color: primaryColor),
+          //     ),
+          //   ),
+          // )
+          
         ],
       ),
     );

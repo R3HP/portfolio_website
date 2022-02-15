@@ -7,10 +7,13 @@ import 'package:portfolio_app/view/sections/main_body/project_grid_view.dart';
 
 class MainBody extends StatelessWidget {
   final List<Project> myProjects;
+  // final ValueChanged<Project> handler;
+
 
   const MainBody({
     Key? key,
     required this.myProjects,
+    // required this.handler,
   }) : super(key: key);
 
   @override
@@ -22,7 +25,9 @@ class MainBody extends StatelessWidget {
       child: ListView(
         children: [
           MyHeader(myProjects: myProjects),
-          ProjectSection(myProjects: myProjects)
+          ProjectSection(
+            // handler: handler,
+            myProjects: myProjects)
         ],
       ),
     );

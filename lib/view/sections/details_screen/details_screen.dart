@@ -15,6 +15,7 @@ class ProjectDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final project = ModalRoute.of(context)?.settings.arguments as Project;
+    print('argument is ${ModalRoute.of(context)?.settings.arguments}');
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -36,14 +37,16 @@ class ProjectDetailsScreen extends StatelessWidget {
               children: [
                 Text(project.desc,style:Theme.of(context).textTheme.subtitle2,),
                 const VerticalDivider(),
-                ListView.builder(
-                  itemCount: project.keyPoints.length,
-                  itemBuilder: (ctx,index) => Row(
-                    children: [
-                      const Text('*', style: TextStyle(color: primaryColor),),
-                      Text(project.keyPoints[index],)
-                    ],
-                  ), 
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: project.keyPoints.length,
+                    itemBuilder: (ctx,index) => Row(
+                      children: [
+                        const Text('*', style: TextStyle(color: primaryColor),),
+                        Expanded(child: Text(project.keyPoints[index],))
+                      ],
+                    ), 
+                  ),
                 ),
               ],
             ),
