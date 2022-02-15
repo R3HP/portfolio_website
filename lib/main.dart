@@ -39,17 +39,27 @@ class MyApp extends StatelessWidget {
 
 class ProjectRoutePath {
   int? id;
-  bool isUnknown;
+  late bool isUnknown;
 
   ProjectRoutePath.home() : id=null , isUnknown = false;
 
-  ProjectRoutePath.details(int id) : isUnknown =false;
+  ProjectRoutePath.details(int id){
+    this.id = id;
+    isUnknown = false;
+  }
 
   ProjectRoutePath.unknown() : id = null , isUnknown = true;
 
   bool get isHomePage => id == null && isUnknown == false ? true : false;
 
   bool get isDetailsPage => id != null;
+
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    return 'Project Route Path is id:$id , isUnknwon :$isUnknown';
+  }
 
 }
 
@@ -73,7 +83,7 @@ ChangeNotifier , PopNavigatorRouterDelegateMixin<ProjectRoutePath> {
 
     return _selectedProject == null
         ? ProjectRoutePath.home()
-        : ProjectRoutePath.details(Project.projects.indexOf(_selectedProject!));
+        : ProjectRoutePath.details(_selectedProject!.id);
   }
 
 
@@ -116,7 +126,7 @@ ChangeNotifier , PopNavigatorRouterDelegateMixin<ProjectRoutePath> {
       },
       key: navigatorKey,
       pages: [
-        MaterialPage(
+        const MaterialPage(
           key: ValueKey('home'),
           child: HomeScreen(
             // handler: handleProjectTapped
@@ -149,13 +159,14 @@ ChangeNotifier , PopNavigatorRouterDelegateMixin<ProjectRoutePath> {
         show404 = true;
         return;
       }
-
+      
       _selectedProject = Project.projects.firstWhere((element) => element.id == configuration.id);
       print('id of selected project is ${_selectedProject?.id}');
     }else{
       _selectedProject = null;
     }
     show404 =false;
+    notifyListeners();
   }
 }
 
@@ -188,7 +199,7 @@ class ProjectRouteInformationParser extends RouteInformationParser<ProjectRouteP
         return ProjectRoutePath.unknown();
       }else{
         print('now returns details');
-        return ProjectRoutePath.details(id)..id=id;
+        return ProjectRoutePath.details(id);
       }
       
     }
@@ -197,6 +208,7 @@ class ProjectRouteInformationParser extends RouteInformationParser<ProjectRouteP
 
   @override
   RouteInformation? restoreRouteInformation(ProjectRoutePath configuration) {
+    print('restore configurations is $configuration');
     if (configuration.isUnknown) {
       return const RouteInformation(location: '/404');
     }else if (configuration.isHomePage){

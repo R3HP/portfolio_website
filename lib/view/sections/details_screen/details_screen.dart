@@ -35,10 +35,11 @@ class ProjectDetailsScreen extends StatelessWidget {
             Text(project.name,style: Theme.of(context).textTheme.subtitle1,),
             Row(
               children: [
-                Text(project.desc,style:Theme.of(context).textTheme.subtitle2,),
+                Expanded(child: Text(project.desc,style:Theme.of(context).textTheme.subtitle2,)),
                 const VerticalDivider(),
                 Expanded(
                   child: ListView.builder(
+                    shrinkWrap: true,
                     itemCount: project.keyPoints.length,
                     itemBuilder: (ctx,index) => Row(
                       children: [
