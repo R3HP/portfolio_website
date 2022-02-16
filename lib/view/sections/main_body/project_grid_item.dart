@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio_app/constants.dart';
-import 'package:portfolio_app/main.dart';
 import 'package:portfolio_app/model/project.dart';
 import 'package:portfolio_app/view/sections/details_screen/details_screen.dart';
 import 'package:url_launcher/link.dart';
@@ -28,13 +27,14 @@ class ProjectGridItem extends StatelessWidget {
         children: [
           Text(
             project.name,
-            style: Theme.of(context).textTheme.subtitle1,
+            style: Theme.of(context).textTheme.subtitle1!.copyWith(fontWeight: FontWeight.bold),
           ),
           const Spacer(),
-          Expanded(
-              child: SingleChildScrollView(
-                  child: Text(project.desc,
-                      style: Theme.of(context).textTheme.subtitle2))),
+          Text(project.desc,
+          maxLines: 9,
+          overflow: TextOverflow.ellipsis,
+
+              style: Theme.of(context).textTheme.subtitle2),
           const Spacer(),
           // TextButton(
           //     onPressed: () {
