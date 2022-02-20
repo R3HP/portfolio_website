@@ -1,6 +1,9 @@
 # portfolio_app
 
-A new Flutter project.
+A Demo Portfolio Web App Bult with Flutter . this project has 3 branches using three different navigation solution . 1-main = Base Navigator 2.0 provided by Flutter  2-Navigator1_onGenerate_Route = this solution is implemented by Navigator 1 using onGenerateRoute callback usefull for small projects . 3-Beamer = using Beamer Package 
+
+
+- note : Design is inspired by Codepur youtube Video
 
 ## Getting Started
 
