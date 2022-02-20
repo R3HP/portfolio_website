@@ -1,3 +1,4 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio_app/constants.dart';
 import 'package:portfolio_app/model/project.dart';
@@ -34,17 +35,18 @@ class ProjectGridItem extends StatelessWidget {
                   child: Text(project.desc,
                       style: Theme.of(context).textTheme.subtitle2))),
           const Spacer(),
-          Link(
+          TextButton(onPressed: () => Beamer.of(context).beamToNamed('/details/${project.id}',data: project), child: const Text('Read '))
+          // Link(
 
-            uri: Uri.parse(ProjectDetailsScreen.routeName + '/${project.id}'),
-            builder: (ctx, onTap) => TextButton(
-              onPressed: onTap,
-              child: const Text(
-                'Read More ...',
-                style: TextStyle(color: primaryColor),
-              ),
-            ),
-          )
+          //   uri: Uri.parse(ProjectDetailsScreen.routeName + '/${project.id}'),
+          //   builder: (ctx, onTap) => TextButton(
+          //     onPressed: onTap,
+          //     child: const Text(
+          //       'Read More ...',
+          //       style: TextStyle(color: primaryColor),
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );

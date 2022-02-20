@@ -23,10 +23,14 @@ class HomeLocation extends BeamLocation {
 }
 
 class ProjectDetailsLocation extends BeamLocation<BeamState> {
+  
+
   @override
   List<BeamPage> buildPages(BuildContext context, BeamState state) {
+    
     final pages = [
       const BeamPage(
+
           key: ValueKey('/home'),
           child: HomeScreen(),
           title: 'Portfolio Website'),
@@ -38,17 +42,22 @@ class ProjectDetailsLocation extends BeamLocation<BeamState> {
             Project.projects.firstWhere((project) => project.id == projectId);
         pages.add(
           BeamPage(
+            popToNamed: '/',
               key: ValueKey('/details/${projectId}'),
               child: ProjectDetailsScreen(project: project),
               title: project.name),
         );
+
       }
+      
     }
     return pages;
   }
 
+  
+
   @override
-  List<Pattern> get pathPatterns => ['/details/:id'];
+  List<Pattern> get pathPatterns => ['/','/details/:id'];
 }
 
 class UnknownLocation extends BeamLocation {
@@ -62,6 +71,6 @@ class UnknownLocation extends BeamLocation {
   }
 
   @override
-  // TODO: implement pathPatterns
-  List<Pattern> get pathPatterns => throw UnimplementedError();
+  
+  List<Pattern> get pathPatterns => ['/','/404'];
 }

@@ -29,7 +29,9 @@ class MyApp extends StatelessWidget {
       routeInformationParser: BeamerParser(),
 
       routerDelegate: BeamerDelegate(
+        
         locationBuilder: BeamerLocationBuilder(
+
             beamLocations: [HomeLocation(), ProjectDetailsLocation()]),
       ),
     );
