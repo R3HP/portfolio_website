@@ -36,7 +36,7 @@ class ProjectGridItem extends StatelessWidget {
           const Spacer(),
           Link(
 
-            uri: Uri.parse(ProjectDetailsScreen.routeName),
+            uri: Uri.parse(ProjectDetailsScreen.routeName + '/${project.id}'),
             builder: (ctx, onTap) => TextButton(
               onPressed: onTap,
               child: const Text(

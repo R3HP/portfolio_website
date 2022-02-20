@@ -1,5 +1,7 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio_app/beam_locations.dart';
 import 'package:portfolio_app/constants.dart';
 import 'package:portfolio_app/view/home_screen.dart';
 import 'package:portfolio_app/view/sections/details_screen/details_screen.dart';
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
       theme: ThemeData.dark().copyWith(
           primaryColor: primaryColor,
@@ -24,10 +26,12 @@ class MyApp extends StatelessWidget {
               .copyWith(
                   bodyText1: const TextStyle(color: bodyTextColor),
                   bodyText2: const TextStyle(color: bodyTextColor))),
-      home: const HomeScreen(),
-      routes: {
-        ProjectDetailsScreen.routeName :(context) => const ProjectDetailsScreen()
-      },
+      routeInformationParser: BeamerParser(),
+
+      routerDelegate: BeamerDelegate(
+        locationBuilder: BeamerLocationBuilder(
+            beamLocations: [HomeLocation(), ProjectDetailsLocation()]),
+      ),
     );
   }
 }

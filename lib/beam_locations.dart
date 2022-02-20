@@ -10,7 +10,12 @@ class HomeLocation extends BeamLocation {
   @override
   List<BeamPage> buildPages(
       BuildContext context, RouteInformationSerializable state) {
-    return [const BeamPage(key: ValueKey('/home'), child: HomeScreen())];
+    return [
+      const BeamPage(
+          key: ValueKey('/home'),
+          child: HomeScreen(),
+          title: 'Portfolio Website')
+    ];
   }
 
   @override
@@ -21,41 +26,29 @@ class ProjectDetailsLocation extends BeamLocation<BeamState> {
   @override
   List<BeamPage> buildPages(BuildContext context, BeamState state) {
     final pages = [
-      const BeamPage(key: ValueKey('/home'), child: HomeScreen()),
+      const BeamPage(
+          key: ValueKey('/home'),
+          child: HomeScreen(),
+          title: 'Portfolio Website'),
     ];
-    if (state.uri.pathSegments[0] == 'details'){
+    if (state.uri.pathSegments[0] == 'details') {
       final projectId = int.tryParse(state.uri.pathSegments[1]);
-        if (projectId != null){
-          pages.add(BeamPage(key: ValueKey('/details/${projectId}'),child: const ProjectDetailsScreen(),routeBuilder: (context,setting,child){
-            setting.copyWith(arguments: Project.projects.firstWhere((project) => project.id == projectId));
-            context
-          }));
-    }}
+      if (projectId != null) {
+        final project =
+            Project.projects.firstWhere((project) => project.id == projectId);
+        pages.add(
+          BeamPage(
+              key: ValueKey('/details/${projectId}'),
+              child: ProjectDetailsScreen(project: project),
+              title: project.name),
+        );
+      }
+    }
     return pages;
   }
 
   @override
   List<Pattern> get pathPatterns => ['/details/:id'];
-
-  // ProjectDetailsScreen.withParameters({
-  //   Map<String,String> path,
-  //   Map<String,String> query
-  // }) : super
-
-  // @override
-  // List<BeamPage> buildPages(BuildContext context, RouteInformationSerializable state) {
-  //   return [
-  //     const BeamPage(
-  //       key: ValueKey('/home'),
-  //       child: HomeScreen()
-  //     ),
-  //     if(state.)
-  //   ];
-  // }
-
-  // @override
-  // List<Pattern> get pathPatterns => ['/details/:id'];
-
 }
 
 class UnknownLocation extends BeamLocation {
